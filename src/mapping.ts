@@ -1,14 +1,14 @@
 import { Address, BigInt } from "@graphprotocol/graph-ts"
 import { BuilderInstanceCreated } from "../generated/NiftyGateway/NiftyGateway"
-import { NFTContract as NFTContractTemplate } from "../generated/templates"
-import { ERC721, Transfer } from "../generated/templates/NFTContract/ERC721"
-import { NFTContract, NFT } from "../generated/schema"
+import { NftContract as NftContractTemplate } from "../generated/templates"
+import { ERC721, Transfer } from "../generated/templates/NftContract/ERC721"
+import { NftContract, Nft } from "../generated/schema"
 
 export function handleBuilderInstanceCreated(event: BuilderInstanceCreated): void {
   let address = event.params.new_contract_address;
-  NFTContractTemplate.create(address);
+  NftContractTemplate.create(address);
 
-  let nftContract = new NFTContract(address.toHexString());
+  let nftContract = new NftContract(address.toHexString());
   nftContract.name = fetchName(address);
   nftContract.symbol = fetchSymbol(address);
   nftContract.platform = "NiftyGateway";
@@ -17,9 +17,9 @@ export function handleBuilderInstanceCreated(event: BuilderInstanceCreated): voi
 
 export function handleTransfer(event: Transfer): void {
   let id = `${event.address.toHexString()}/${event.params.id}`;
-  let nft = NFT.load(id);
+  let nft = Nft.load(id);
   if (nft == null) {
-    nft = new NFT(id);
+    nft = new Nft(id);
     nft.contract = event.address.toHexString();
     nft.tokenID = event.params.id;
     nft.creatorName = fetchCreatorName(event.address);

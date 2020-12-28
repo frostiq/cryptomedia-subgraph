@@ -1,13 +1,13 @@
-type NFT @entity {
+type Nft @entity {
   id: ID!
-  contract: NFTContract!
+  contract: NftContract!
   tokenID: BigInt!
   owner: Bytes!
   creatorName: String!
   tokenURI: String!
 }
 
-type NFTContract @entity {
+type NftContract @entity {
   id: ID!
   name: String!
   symbol: String

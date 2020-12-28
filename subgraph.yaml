@@ -8,22 +8,25 @@ dataSources:
     source:
       address: "0x431bd1297a1c7664D599364a427A2d926a1f58aE"
       abi: NiftyGateway
+      startBlock: 9716435
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - NFTContract
+        - NftContract
       abis:
         - name: NiftyGateway
           file: ./abis/NiftyGateway.json
+        - name: ERC721
+          file: ./abis/ERC721.json
       eventHandlers:
         - event: BuilderInstanceCreated(address,uint256)
           handler: handleBuilderInstanceCreated
       file: ./src/mapping.ts
 templates:
   - kind: ethereum/contract
-    name: NFTContract
+    name: NftContract
     network: mainnet
     source:
       abi: ERC721
@@ -32,7 +35,7 @@ templates:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - NFT
+        - Nft
       abis:
         - name: ERC721
           file: ./abis/ERC721.json
