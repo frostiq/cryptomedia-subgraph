@@ -1,4 +1,4 @@
-specVersion: 0.0.1
+specVersion: 0.0.2
 schema:
   file: ./schema.graphql
 dataSources:
@@ -10,10 +10,10 @@ dataSources:
       abi: NiftyGateway
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.2
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - BuilderInstanceCreated
+        - NFTContract
       abis:
         - name: NiftyGateway
           file: ./abis/NiftyGateway.json
@@ -21,3 +21,23 @@ dataSources:
         - event: BuilderInstanceCreated(address,uint256)
           handler: handleBuilderInstanceCreated
       file: ./src/mapping.ts
+templates:
+  - kind: ethereum/contract
+    name: NFTContract
+    network: mainnet
+    source:
+      abi: ERC721
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - NFT
+      abis:
+        - name: ERC721
+          file: ./abis/ERC721.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
+     

@@ -1,6 +1,19 @@
-type ExampleEntity @entity {
+type NFT @entity {
   id: ID!
-  count: BigInt!
-  new_contract_address: Bytes! # address
-  contractId: BigInt! # uint256
+  contract: NFTContract!
+  tokenID: BigInt!
+  owner: Bytes!
+  creatorName: String!
+  tokenURI: String!
+}
+
+type NFTContract @entity {
+  id: ID!
+  name: String!
+  symbol: String
+  platform: Platform!
+}
+
+enum Platform {
+  NiftyGateway
 }

@@ -1,52 +1,51 @@
-import { BigInt } from "@graphprotocol/graph-ts"
-import {
-  NiftyGateway,
-  BuilderInstanceCreated
-} from "../generated/NiftyGateway/NiftyGateway"
-import { ExampleEntity } from "../generated/schema"
+import { Address, BigInt } from "@graphprotocol/graph-ts"
+import { BuilderInstanceCreated } from "../generated/NiftyGateway/NiftyGateway"
+import { NFTContract as NFTContractTemplate } from "../generated/templates"
+import { ERC721, Transfer } from "../generated/templates/NFTContract/ERC721"
+import { NFTContract, NFT } from "../generated/schema"
 
-export function handleBuilderInstanceCreated(
-  event: BuilderInstanceCreated
-): void {
-  // Entities can be loaded from the store using a string ID; this ID
-  // needs to be unique across all entities of the same type
-  let entity = ExampleEntity.load(event.transaction.from.toHex())
+export function handleBuilderInstanceCreated(event: BuilderInstanceCreated): void {
+  const address = event.params.new_contract_address;
+  NFTContractTemplate.create(address);
 
-  // Entities only exist after they have been saved to the store;
-  // `null` checks allow to create entities on demand
-  if (entity == null) {
-    entity = new ExampleEntity(event.transaction.from.toHex())
+  const nftContract = new NFTContract(address.toHexString());
+  nftContract.name = fetchName(address);
+  nftContract.symbol = fetchSymbol(address);
+  nftContract.platform = "NiftyGateway";
+  nftContract.save();
+}
 
-    // Entity fields can be set using simple assignments
-    entity.count = BigInt.fromI32(0)
+export function handleTransfer(event: Transfer): void {
+  const id = `${event.address.toHexString()}/${event.params.id}`;
+  let nft = NFT.load(id);
+  if (nft == null) {
+    nft = new NFT(id);
+    nft.contract = event.address.toHexString();
+    nft.tokenID = event.params.id;
+    nft.creatorName = fetchCreatorName(event.address);
+    nft.tokenURI = fetchTokenURI(event.address, event.params.id);
   }
 
-  // BigInt and BigDecimal math are supported
-  entity.count = entity.count + BigInt.fromI32(1)
+  nft.owner = event.params.to;
+  nft.save();
+}
 
-  // Entity fields can be set based on event parameters
-  entity.new_contract_address = event.params.new_contract_address
-  entity.contractId = event.params.contractId
+function fetchName(tokenAddress: Address): string {
+  const contract = ERC721.bind(tokenAddress);
+  return contract.name();
+}
 
-  // Entities can be written to the store with `.save()`
-  entity.save()
+function fetchSymbol(tokenAddress: Address): string {
+  const contract = ERC721.bind(tokenAddress);
+  return contract.symbol();
+}
 
-  // Note: If a handler doesn't require existing field values, it is faster
-  // _not_ to load the entity from the store. Instead, create it fresh with
-  // `new Entity(...)`, set the fields that should be updated and save the
-  // entity back to the store. Fields that were not set or unset remain
-  // unchanged, allowing for partial updates to be applied.
+function fetchCreatorName(tokenAddress: Address): string {
+  const contract = ERC721.bind(tokenAddress);
+  return contract.nameOfCreator();
+}
 
-  // It is also possible to access smart contracts from mappings. For
-  // example, the contract that has emitted the event can be connected to
-  // with:
-  //
-  // let contract = Contract.bind(event.address)
-  //
-  // The following functions can then be called on this contract to access
-  // state variables and other data:
-  //
-  // - contract.createNewBuilderInstance(...)
-  // - contract.BuilderShops(...)
-  // - contract.isValidBuilderShop(...)
+function fetchTokenURI(tokenAddress: Address, tokenId: BigInt): string {
+  const contract = ERC721.bind(tokenAddress);
+  return contract.tokenURI(tokenId);
 }
