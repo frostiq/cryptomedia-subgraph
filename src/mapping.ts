@@ -16,7 +16,7 @@ export function handleBuilderInstanceCreated(event: BuilderInstanceCreated): voi
 }
 
 export function handleTransfer(event: Transfer): void {
-  let id = `${event.address.toHexString()}/${event.params.id}`;
+  let id = event.address.toHexString() + "/" + event.params.id.toString();
   let nft = Nft.load(id);
   if (nft == null) {
     nft = new Nft(id);
