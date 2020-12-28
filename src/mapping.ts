@@ -5,10 +5,10 @@ import { ERC721, Transfer } from "../generated/templates/NFTContract/ERC721"
 import { NFTContract, NFT } from "../generated/schema"
 
 export function handleBuilderInstanceCreated(event: BuilderInstanceCreated): void {
-  const address = event.params.new_contract_address;
+  let address = event.params.new_contract_address;
   NFTContractTemplate.create(address);
 
-  const nftContract = new NFTContract(address.toHexString());
+  let nftContract = new NFTContract(address.toHexString());
   nftContract.name = fetchName(address);
   nftContract.symbol = fetchSymbol(address);
   nftContract.platform = "NiftyGateway";
@@ -16,7 +16,7 @@ export function handleBuilderInstanceCreated(event: BuilderInstanceCreated): voi
 }
 
 export function handleTransfer(event: Transfer): void {
-  const id = `${event.address.toHexString()}/${event.params.id}`;
+  let id = `${event.address.toHexString()}/${event.params.id}`;
   let nft = NFT.load(id);
   if (nft == null) {
     nft = new NFT(id);
@@ -31,21 +31,21 @@ export function handleTransfer(event: Transfer): void {
 }
 
 function fetchName(tokenAddress: Address): string {
-  const contract = ERC721.bind(tokenAddress);
+  let contract = ERC721.bind(tokenAddress);
   return contract.name();
 }
 
 function fetchSymbol(tokenAddress: Address): string {
-  const contract = ERC721.bind(tokenAddress);
+  let contract = ERC721.bind(tokenAddress);
   return contract.symbol();
 }
 
 function fetchCreatorName(tokenAddress: Address): string {
-  const contract = ERC721.bind(tokenAddress);
+  let contract = ERC721.bind(tokenAddress);
   return contract.nameOfCreator();
 }
 
 function fetchTokenURI(tokenAddress: Address, tokenId: BigInt): string {
-  const contract = ERC721.bind(tokenAddress);
+  let contract = ERC721.bind(tokenAddress);
   return contract.tokenURI(tokenId);
 }
