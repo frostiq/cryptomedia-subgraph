@@ -1,0 +1,45 @@
+[
+  {
+    "constant": false,
+    "inputs": [
+      { "name": "_name", "type": "string" },
+      { "name": "_symbol", "type": "string" },
+      { "name": "num_nifties", "type": "uint256" },
+      { "name": "nifty_quantities", "type": "uint256[]" },
+      { "name": "token_base_uri", "type": "string" },
+      { "name": "creator_name", "type": "string" }
+    ],
+    "name": "createNewBuilderInstance",
+    "outputs": [{ "name": "tokenAddress", "type": "address" }],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [{ "name": "", "type": "address" }],
+    "name": "BuilderShops",
+    "outputs": [{ "name": "", "type": "bool" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [{ "name": "builder_shop", "type": "address" }],
+    "name": "isValidBuilderShop",
+    "outputs": [{ "name": "isValid", "type": "bool" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": false, "name": "new_contract_address", "type": "address" },
+      { "indexed": false, "name": "contractId", "type": "uint256" }
+    ],
+    "name": "BuilderInstanceCreated",
+    "type": "event"
+  }
+]

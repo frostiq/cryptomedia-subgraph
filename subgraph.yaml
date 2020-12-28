@@ -1,0 +1,23 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: NiftyGateway
+    network: mainnet
+    source:
+      address: "0x431bd1297a1c7664D599364a427A2d926a1f58aE"
+      abi: NiftyGateway
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - BuilderInstanceCreated
+      abis:
+        - name: NiftyGateway
+          file: ./abis/NiftyGateway.json
+      eventHandlers:
+        - event: BuilderInstanceCreated(address,uint256)
+          handler: handleBuilderInstanceCreated
+      file: ./src/mapping.ts
