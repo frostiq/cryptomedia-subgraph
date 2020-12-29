@@ -2,7 +2,7 @@
 
 > All cryptomedia NFTs in one subgraph
 
-More about subgrapsh and The Graph protocol you can find [here](https://thegraph.com/docs/introduction).
+More about subgraphs and The Graph protocol you can find [here](https://thegraph.com/docs/introduction).
 
 ### Deliverables for the NFT subgraph:
 - Query created NFTs by address
@@ -13,11 +13,11 @@ More about subgrapsh and The Graph protocol you can find [here](https://thegraph
 
 The challenge is to be able to pull from:
 - [x] Rarible
-- [] Superrare
-- [] Known Origin
+- [ ] Superrare
+- [ ] Known Origin
 - [x] Nifty Gateway
-- [] OurZora.com
-- [] WithFoundation.com
+- [ ] OurZora.com
+- [ ] WithFoundation.com
 
 And having an open GitHub so anyone can PR new smart contracts associated with those platforms.
 
