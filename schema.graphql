@@ -3,7 +3,8 @@ type Nft @entity {
   contract: NftContract!
   tokenID: BigInt!
   owner: Bytes!
-  creatorName: String!
+  creatorName: String
+  creatorAddress: Bytes
   tokenURI: String!
 }
 
@@ -12,8 +13,10 @@ type NftContract @entity {
   name: String!
   symbol: String
   platform: Platform!
+  nfts: [Nft!]! @derivedFrom(field: "contract")
 }
 
 enum Platform {
-  NiftyGateway
+  NiftyGateway,
+  Rarible
 }

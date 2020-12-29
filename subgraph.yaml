@@ -24,6 +24,33 @@ dataSources:
         - event: BuilderInstanceCreated(address,uint256)
           handler: handleBuilderInstanceCreated
       file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: Rarible
+    network: mainnet
+    source:
+      address: "0xd07dc4262BCDbf85190C01c996b4C06a461d2430"
+      abi: ERC1155
+      startBlock: 10147631
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - NftContract
+        - Nft
+      abis:
+        - name: ERC1155
+          file: ./abis/ERC1155.json
+        - name: ERC721
+          file: ./abis/ERC721.json
+      eventHandlers:
+        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
+          handler: handleTransferBatch
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+        - event: URI(string,indexed uint256)
+          handler: handleURI
+      file: ./src/mapping.ts
 templates:
   - kind: ethereum/contract
     name: NftContract
