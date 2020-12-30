@@ -28,6 +28,7 @@ export function handleTransfer(event: Transfer): void {
     nft.tokenID = event.params.id;
     nft.creatorName = contract.nameOfCreator();
     nft.tokenURI = contract.tokenURI(event.params.id);
+    nft.createdAt = event.block.timestamp;
   }
 
   nft.owner = account.id;
@@ -57,6 +58,7 @@ export function handleTransferSingle(event: TransferSingle): void {
     nft.tokenID = event.params._id;
     nft.creatorAddress = contract.creators(event.params._id);
     nft.tokenURI = contract.uri(event.params._id);
+    nft.createdAt = event.block.timestamp;
   }
 
   nft.owner = account.id;
