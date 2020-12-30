@@ -12,6 +12,7 @@ import {
 } from "../generated/SuperRare/SuperRare";
 import { Nft, NftContract } from "../generated/schema";
 import { ZERO_ADDRESS } from "./constants";
+import { getOrCreateAccount } from "./utils";
 
 /**
  * Standard ERC721
@@ -20,6 +21,7 @@ export function handleTransfer(event: Transfer): void {
   let contract = SuperRare.bind(event.address);
   let address = event.address.toHexString();
   let tokenId = address + "/" + event.params._tokenId.toString();
+  let account = getOrCreateAccount(event.params._to);
 
   if (NftContract.load(address) == null) {
     let nftContract = new NftContract(address);
@@ -41,7 +43,7 @@ export function handleTransfer(event: Transfer): void {
     // burn token
     nft.removedAt = event.block.timestamp;
   }
-  nft.owner = event.params._to;
+  nft.owner = account.id;
   nft.save();
 }
 
@@ -50,7 +52,11 @@ export function handleApproval(event: Approval): void { }
 /**
  * SuperRare specific
  */
-export function handleWhitelistCreator(event: WhitelistCreator): void { }
+export function handleWhitelistCreator(event: WhitelistCreator): void {
+  let account = getOrCreateAccount(event.params._creator);
+  account.isCreator = true;
+  account.save();
+}
 
 export function handleBid(event: Bid): void { }
 

@@ -4,6 +4,7 @@ import { TransferSingle, TransferBatch, URI, ERC1155 } from "../generated/Raribl
 import { NftContract as NftContractTemplate } from "../generated/templates"
 import { ERC721, Transfer } from "../generated/templates/NftContract/ERC721"
 import { NftContract, Nft } from "../generated/schema"
+import { getOrCreateAccount } from "./utils";
 
 export function handleBuilderInstanceCreated(event: BuilderInstanceCreated): void {
   let address = event.params.new_contract_address;
@@ -19,6 +20,7 @@ export function handleBuilderInstanceCreated(event: BuilderInstanceCreated): voi
 export function handleTransfer(event: Transfer): void {
   let id = event.address.toHexString() + "/" + event.params.id.toString();
   let contract = ERC721.bind(event.address);
+  let account = getOrCreateAccount(event.params.to);
   let nft = Nft.load(id);
   if (nft == null) {
     nft = new Nft(id);
@@ -28,7 +30,7 @@ export function handleTransfer(event: Transfer): void {
     nft.tokenURI = contract.tokenURI(event.params.id);
   }
 
-  nft.owner = event.params.to;
+  nft.owner = account.id;
   nft.save();
 }
 
@@ -47,6 +49,7 @@ export function handleTransferSingle(event: TransferSingle): void {
 
   let id = address + "/" + event.params._id.toString();
   let contract = ERC1155.bind(event.address);
+  let account = getOrCreateAccount(event.params._to);
   let nft = Nft.load(id);
   if (nft == null) {
     nft = new Nft(id);
@@ -56,7 +59,7 @@ export function handleTransferSingle(event: TransferSingle): void {
     nft.tokenURI = contract.uri(event.params._id);
   }
 
-  nft.owner = event.params._to;
+  nft.owner = account.id;
   nft.save();
 }
 
