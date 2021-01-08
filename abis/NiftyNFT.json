@@ -1,0 +1,17 @@
+[
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "nameOfCreator",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      }
+]
