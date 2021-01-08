@@ -1,6 +1,7 @@
 import { Address } from "@graphprotocol/graph-ts"
 import { BuilderInstanceCreated } from "../generated/NiftyGateway/NiftyGateway"
 import { TransferSingle, TransferBatch, URI, ERC1155 } from "../generated/Rarible/ERC1155";
+import { Transfer as KnowOriginTransferEvent } from "../generated/KnowOrigin/KnowOrigin";
 import { NftContract as NftContractTemplate } from "../generated/templates"
 import { ERC721, Transfer } from "../generated/templates/NftContract/ERC721"
 import { NftContract, Nft } from "../generated/schema"
@@ -57,6 +58,33 @@ export function handleTransferSingle(event: TransferSingle): void {
   }
 
   nft.owner = event.params._to;
+  nft.save();
+}
+
+export function handleTransferKnowOrigin(event: KnowOriginTransferEvent): void {
+  let address = event.address.toHexString();
+  if (NftContract.load(address) == null) {
+    let nftContract = new NftContract(address);
+
+    nftContract.name = fetchName(event.address);
+    nftContract.symbol = fetchSymbol(event.address);
+    nftContract.platform = "KnowOrigin";
+    nftContract.save();
+  }
+
+  let id = event.transaction.hash.toHex() + "-" + event.logIndex.toString()
+  let contract = ERC721.bind(event.address);
+  let nft = Nft.load(id);
+  if (nft == null) {
+    nft = new Nft(id);
+    nft.contract = event.address.toHexString();
+    nft.tokenID = event.params._tokenId;
+    nft.creatorName = contract.nameOfCreator();
+    nft.tokenURI = contract.tokenURI(event.params._tokenId);
+
+  }
+
+  nft.owner = event.params._to
   nft.save();
 }
 

@@ -51,6 +51,48 @@ dataSources:
         - event: URI(string,indexed uint256)
           handler: handleURI
       file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: KnowOrigin
+    network: mainnet
+    source:
+      address: "0xFBeef911Dc5821886e1dda71586d90eD28174B7d"
+      abi: KnowOrigin
+      startBlock: 10147631
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - NftContract
+        - Nft
+      abis:
+        - name: KnowOrigin
+          file: ./abis/KnowOrigin.json
+        - name: ERC721
+          file: ./abis/ERC721.json
+      eventHandlers:
+          - event: Approval(indexed address,indexed address,indexed uint256)
+            handler: handleApproval
+          - event: ApprovalForAll(indexed address,indexed address,bool)
+            handler: handleApprovalForAll
+          - event: EditionCreated(indexed uint256,indexed bytes32,indexed uint256)
+            handler: handleEditionCreated
+          - event: Minted(indexed uint256,indexed uint256,indexed address)
+            handler: handleMinted
+          - event: OwnershipRenounced(indexed address)
+            handler: handleOwnershipRenounced
+          - event: OwnershipTransferred(indexed address,indexed address)
+            handler: handleOwnershipTransferred
+          - event: Purchase(indexed uint256,indexed uint256,indexed address,uint256)
+            handler: handlePurchase
+          - event: RoleAdded(indexed address,uint8)
+            handler: handleRoleAdded
+          - event: RoleRemoved(indexed address,uint8)
+            handler: handleRoleRemoved
+          - event: Transfer(indexed address,indexed address,indexed uint256)
+            handler: handleTransferKnowOrigin
+
+      file: ./src/mapping.ts
 templates:
   - kind: ethereum/contract
     name: NftContract
