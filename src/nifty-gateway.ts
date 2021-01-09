@@ -1,5 +1,5 @@
 import { BuilderInstanceCreated } from "../generated/NiftyGateway/NiftyGateway"
-import { NiftyNFT } from "../generated/NiftyGateway/NiftyNFT"
+import { NiftyNFT } from "../generated/templates/NftContract/NiftyNFT"
 import { NftContract as NftContractTemplate } from "../generated/templates"
 import { fetchName, fetchSymbol, handleTransfer } from "./mapping";
 import { Transfer } from "../generated/templates/NftContract/ERC721";
