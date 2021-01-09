@@ -20,5 +20,6 @@ type NftContract @entity {
 
 enum Platform {
   NiftyGateway,
-  Rarible
+  Rarible,
+  SuperRare
 }
