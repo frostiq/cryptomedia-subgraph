@@ -1,21 +1,8 @@
 import { Address } from "@graphprotocol/graph-ts"
-import { BuilderInstanceCreated } from "../generated/NiftyGateway/NiftyGateway"
 import { TransferSingle, TransferBatch, URI, ERC1155 } from "../generated/Rarible/ERC1155";
 import { Transfer as KnowOriginTransferEvent } from "../generated/KnowOrigin/KnowOrigin";
-import { NftContract as NftContractTemplate } from "../generated/templates"
 import { ERC721, Transfer } from "../generated/templates/NftContract/ERC721"
 import { NftContract, Nft } from "../generated/schema"
-
-export function handleBuilderInstanceCreated(event: BuilderInstanceCreated): void {
-  let address = event.params.new_contract_address;
-  NftContractTemplate.create(address);
-
-  let nftContract = new NftContract(address.toHexString());
-  nftContract.name = fetchName(address);
-  nftContract.symbol = fetchSymbol(address);
-  nftContract.platform = "NiftyGateway";
-  nftContract.save();
-}
 
 export function handleTransfer(event: Transfer): void {
   let id = event.address.toHexString() + "/" + event.params.id.toString();
@@ -25,7 +12,6 @@ export function handleTransfer(event: Transfer): void {
     nft = new Nft(id);
     nft.contract = event.address.toHexString();
     nft.tokenID = event.params.id;
-    nft.creatorName = contract.nameOfCreator();
     nft.tokenURI = contract.tokenURI(event.params.id);
   }
 
@@ -99,12 +85,12 @@ export function handleURI(event: URI): void {
   nft.save();
 }
 
-function fetchName(tokenAddress: Address): string {
+export function fetchName(tokenAddress: Address): string {
   let contract = ERC721.bind(tokenAddress);
   return contract.name();
 }
 
-function fetchSymbol(tokenAddress: Address): string {
+export function fetchSymbol(tokenAddress: Address): string {
   let contract = ERC721.bind(tokenAddress);
   return contract.symbol();
 }

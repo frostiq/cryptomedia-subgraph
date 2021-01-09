@@ -23,7 +23,7 @@ dataSources:
       eventHandlers:
         - event: BuilderInstanceCreated(address,uint256)
           handler: handleBuilderInstanceCreated
-      file: ./src/mapping.ts
+      file: ./src/nifty-gateway.ts
   - kind: ethereum/contract
     name: Rarible
     network: mainnet
@@ -108,8 +108,10 @@ templates:
       abis:
         - name: ERC721
           file: ./abis/ERC721.json
+        - name: NiftyNFT
+          file: ./abis/NiftyNFT.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
-          handler: handleTransfer
-      file: ./src/mapping.ts
+          handler: handleTransferNiftyGateway
+      file: ./src/nifty-gateway.ts
      
