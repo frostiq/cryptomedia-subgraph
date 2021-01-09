@@ -1,7 +1,6 @@
 import { Address } from "@graphprotocol/graph-ts"
 import { TransferSingle, TransferBatch, URI, ERC1155 } from "../generated/Rarible/ERC1155";
 import { Transfer as EventTransferSupeRare } from "../generated/SupeRare/SupeRareV2";
-import { NftContract as NftContractTemplate } from "../generated/templates";
 import { ERC721, Transfer } from "../generated/templates/NftContract/ERC721"
 import { NftContract, Nft } from "../generated/schema"
 
