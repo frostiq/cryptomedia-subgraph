@@ -6,6 +6,8 @@ type Nft @entity {
   creatorName: String
   creatorAddress: Bytes
   tokenURI: String!
+  createdAt: BigInt!
+  removedAt: BigInt
 }
 
 type NftContract @entity {
