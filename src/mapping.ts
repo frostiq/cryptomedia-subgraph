@@ -3,6 +3,7 @@ import { TransferSingle, TransferBatch, URI, ERC1155 } from "../generated/Raribl
 import { Transfer as EventTransferSupeRare } from "../generated/SupeRare/SupeRareV2";
 import { ERC721, Transfer } from "../generated/templates/NftContract/ERC721"
 import { NftContract, Nft } from "../generated/schema"
+import { NiftyNFT } from "../generated/NiftyGateway/NiftyNFT"
 
 export function handleTransfer(event: Transfer): void {
   let id = event.address.toHexString() + "/" + event.params.id.toString();
@@ -59,15 +60,13 @@ export function handleTransferSupeRare(event: EventTransferSupeRare): void {
   }
 
   let id = event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  let contract = ERC721.bind(event.address);
   let nft = Nft.load(id);
-  if (nft == null) {
+  if (nft.creatorName == null) {
     nft = new Nft(id);
-    nft.contract = event.address.toHexString();
+    let contract = NiftyNFT.bind(event.address);
     nft.tokenID = event.params.tokenId;
-    nft.creatorName = contract.nameOfCreator();
+    nft.creatorName = fetchName(contract)
     nft.tokenURI = contract.tokenURI(event.params.tokenId);
-
   }
 
   nft.owner = event.params.to
