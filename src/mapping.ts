@@ -6,15 +6,6 @@ import { ZERO_ADDRESS } from "./constants";
 
 export function handleTransfer(event: Transfer): void {
   let address = event.address.toHexString();
-
-  if (NftContract.load(address) == null) {
-    let nftContract = new NftContract(address);
-    nftContract.name = fetchName(event.address);
-    nftContract.symbol = fetchSymbol(event.address);
-    nftContract.platform = nftContract.name;
-    nftContract.save();
-  }
-
   let id = address + "/" + event.params.id.toString();
   let contract = ERC721.bind(event.address);
   let nft = Nft.load(id);

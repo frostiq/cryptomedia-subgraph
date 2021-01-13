@@ -70,8 +70,8 @@ dataSources:
           file: ./abis/ERC721.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
-      file: ./src/mapping.ts             
+          handler: handleTransferSuperRare
+      file: ./src/superRare.ts             
 templates:
   - kind: ethereum/contract
     name: NftContract
