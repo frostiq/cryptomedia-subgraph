@@ -68,10 +68,35 @@ dataSources:
       abis:
         - name: ERC721
           file: ./abis/ERC721.json
+        - name: SuperRare
+          file: ./abis/SuperRare.json          
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransferSuperRare
-      file: ./src/superRare.ts             
+      file: ./src/superRare.ts
+  - kind: ethereum/contract
+    name: SuperRareV2
+    network: mainnet
+    source:
+      address: "0xb932a70A57673d89f4acfFBE830E8ed7f75Fb9e0"
+      abi: ERC721
+      startBlock: 8486734
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - NftContract
+        - Nft
+      abis:
+        - name: ERC721
+          file: ./abis/ERC721.json
+        - name: SuperRareV2
+          file: ./abis/SuperRareV2.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransferSuperRare
+      file: ./src/superRare.ts
 templates:
   - kind: ethereum/contract
     name: NftContract

@@ -16,7 +16,7 @@ export function handleTransfer(event: Transfer): void {
     nft.tokenURI = contract.tokenURI(event.params.id);
     nft.createdAt = event.block.timestamp;
   }
-  if (event.params.to.toHex() == ZERO_ADDRESS) {
+  if (event.params.to == ZERO_ADDRESS) {
     // burn token
     nft.removedAt = event.block.timestamp;
   }
@@ -48,7 +48,7 @@ export function handleTransferSingle(event: TransferSingle): void {
     nft.tokenURI = contract.uri(event.params._id);
     nft.createdAt = event.block.timestamp;
   }
-  if (event.params._to.toHex() == ZERO_ADDRESS) {
+  if (event.params._to == ZERO_ADDRESS) {
     // burn token
     nft.removedAt = event.block.timestamp;
   }
