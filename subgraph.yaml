@@ -94,7 +94,7 @@ dataSources:
         - name: SuperRareV2
           file: ./abis/SuperRareV2.json
       eventHandlers:
-        - event: Transfer(indexed address,indexed address,uint256)
+        - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransferSuperRare
       file: ./src/superRare.ts
 templates:
