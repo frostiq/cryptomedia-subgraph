@@ -6,6 +6,8 @@ type Nft @entity {
   creatorName: String
   creatorAddress: Bytes
   tokenURI: String!
+  createdAt: BigInt!
+  removedAt: BigInt
 }
 
 type NftContract @entity {
@@ -18,5 +20,6 @@ type NftContract @entity {
 
 enum Platform {
   NiftyGateway,
-  Rarible
+  Rarible,
+  SuperRare
 }

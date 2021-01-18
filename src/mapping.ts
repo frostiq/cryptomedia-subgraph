@@ -2,18 +2,24 @@ import { Address } from "@graphprotocol/graph-ts"
 import { TransferSingle, TransferBatch, URI, ERC1155 } from "../generated/Rarible/ERC1155";
 import { ERC721, Transfer } from "../generated/templates/NftContract/ERC721"
 import { NftContract, Nft } from "../generated/schema"
+import { ZERO_ADDRESS } from "./constants";
 
 export function handleTransfer(event: Transfer): void {
-  let id = event.address.toHexString() + "/" + event.params.id.toString();
+  let address = event.address.toHexString();
+  let id = address + "/" + event.params.id.toString();
   let contract = ERC721.bind(event.address);
   let nft = Nft.load(id);
   if (nft == null) {
     nft = new Nft(id);
-    nft.contract = event.address.toHexString();
+    nft.contract = address;
     nft.tokenID = event.params.id;
     nft.tokenURI = contract.tokenURI(event.params.id);
+    nft.createdAt = event.block.timestamp;
   }
-
+  if (event.params.to == ZERO_ADDRESS) {
+    // burn token
+    nft.removedAt = event.block.timestamp;
+  }
   nft.owner = event.params.to;
   nft.save();
 }
@@ -40,6 +46,11 @@ export function handleTransferSingle(event: TransferSingle): void {
     nft.tokenID = event.params._id;
     nft.creatorAddress = contract.creators(event.params._id);
     nft.tokenURI = contract.uri(event.params._id);
+    nft.createdAt = event.block.timestamp;
+  }
+  if (event.params._to == ZERO_ADDRESS) {
+    // burn token
+    nft.removedAt = event.block.timestamp;
   }
 
   nft.owner = event.params._to;
