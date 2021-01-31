@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-import { Address } from "@graphprotocol/graph-ts"
-import { TransferSingle, TransferBatch, URI, ERC1155 } from "../generated/Rarible/ERC1155";
-import { Transfer as KnowOriginTransferEvent } from "../generated/KnowOrigin/KnowOrigin";
-=======
 import { Address, BigInt, store } from "@graphprotocol/graph-ts"
 import { URI } from "../generated/Rarible/ERC1155";
->>>>>>> frosq/erc1155-semifungibility-support
 import { ERC721, Transfer } from "../generated/templates/NftContract/ERC721"
 import { Nft, Ownership } from "../generated/schema"
 import { BIGINT_ONE, BIGINT_ZERO, ZERO_ADDRESS } from "./constants";
@@ -33,51 +27,7 @@ export function handleTransfer(event: Transfer): void {
   if (event.params.from != ZERO_ADDRESS) {
     updateOwnership(nftId, event.params.from, BIGINT_ZERO.minus(BIGINT_ONE));
   }
-<<<<<<< HEAD
-
-  nft.owner = event.params._to;
-  nft.save();
-}
-
-export function handleTransferKnowOrigin(event: KnowOriginTransferEvent): void {
-  let address = event.address.toHexString();
-  if (NftContract.load(address) == null) {
-    let nftContract = new NftContract(address);
-
-    nftContract.name = fetchName(event.address);
-    nftContract.symbol = fetchSymbol(event.address);
-    nftContract.platform = "KnowOrigin";
-    nftContract.save();
-  }
-
-  let id = event.transaction.hash.toHex() + "-" + event.logIndex.toString()
-  let contract = ERC721.bind(event.address);
-  let nft = Nft.load(id);
-  if (nft == null) {
-    nft = new Nft(id);
-    nft.contract = event.address.toHexString();
-    nft.tokenID = event.params._tokenId;
-    nft.creatorName = contract.nameOfCreator();
-    nft.tokenURI = contract.tokenURI(event.params._tokenId);
-
-  }
-
-  nft.owner = event.params._to
-  nft.save();
-}
-
-export function handleTransferBatch(event: TransferBatch): void { 
-  // TODO: implement
-}
-
-export function handleURI(event: URI): void { 
-  let id = event.address.toHexString() + "/" + event.params._id.toString();
-  let nft = new Nft(id);
-  nft.tokenURI = event.params._value;
-  nft.save();
-=======
   updateOwnership(nftId, event.params.to, BIGINT_ONE);
->>>>>>> frosq/erc1155-semifungibility-support
 }
 
 export function fetchName(tokenAddress: Address): string {
