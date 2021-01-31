@@ -13,7 +13,7 @@ More about subgraphs and The Graph protocol you can find [here](https://thegraph
 
 The challenge is to be able to pull from:
 - [x] Rarible
-- [ ] Superrare
+- [x] Superrare
 - [ ] Known Origin
 - [x] Nifty Gateway
 - [ ] OurZora.com

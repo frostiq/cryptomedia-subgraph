@@ -50,14 +50,14 @@ dataSources:
           handler: handleTransferSingle
         - event: URI(string,indexed uint256)
           handler: handleURI
-      file: ./src/mapping.ts
+      file: ./src/rarible.ts
   - kind: ethereum/contract
-    name: KnowOrigin
+    name: SuperRare
     network: mainnet
     source:
-      address: "0xFBeef911Dc5821886e1dda71586d90eD28174B7d"
-      abi: KnowOrigin
-      startBlock: 10147631
+      address: "0x41a322b28d0ff354040e2cbc676f0320d8c8850d"
+      abi: ERC721
+      startBlock: 5364090
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -66,33 +66,52 @@ dataSources:
         - NftContract
         - Nft
       abis:
-        - name: KnowOrigin
-          file: ./abis/KnowOrigin.json
         - name: ERC721
           file: ./abis/ERC721.json
+        - name: SuperRare
+          file: ./abis/SuperRare.json          
       eventHandlers:
-          - event: Approval(indexed address,indexed address,indexed uint256)
-            handler: handleApproval
-          - event: ApprovalForAll(indexed address,indexed address,bool)
-            handler: handleApprovalForAll
-          - event: EditionCreated(indexed uint256,indexed bytes32,indexed uint256)
-            handler: handleEditionCreated
-          - event: Minted(indexed uint256,indexed uint256,indexed address)
-            handler: handleMinted
-          - event: OwnershipRenounced(indexed address)
-            handler: handleOwnershipRenounced
-          - event: OwnershipTransferred(indexed address,indexed address)
-            handler: handleOwnershipTransferred
-          - event: Purchase(indexed uint256,indexed uint256,indexed address,uint256)
-            handler: handlePurchase
-          - event: RoleAdded(indexed address,uint8)
-            handler: handleRoleAdded
-          - event: RoleRemoved(indexed address,uint8)
-            handler: handleRoleRemoved
-          - event: Transfer(indexed address,indexed address,indexed uint256)
-            handler: handleTransferKnowOrigin
-
-      file: ./src/mapping.ts
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransferSuperRare
+      file: ./src/superRare.ts
+  - kind: ethereum/contract
+    name: SuperRareV2
+    network: mainnet
+    source:
+      address: "0xb932a70A57673d89f4acfFBE830E8ed7f75Fb9e0"
+      abi: ERC721
+      startBlock: 8486734
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - NftContract
+        - Nft
+      abis:
+        - name: ERC721
+          file: ./abis/ERC721.json
+        - name: SuperRareV2
+          file: ./abis/SuperRareV2.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransferSuperRare
+      file: ./src/superRare.ts
+    - kind: ethereum/contract
+      name: KnowOrigin
+      network: mainnet
+      source:
+        address: "0xFBeef911Dc5821886e1dda71586d90eD28174B7d"
+        abi: KnowOrigin
+        startBlock: 10147631
+        - name: KnowOrigin
+            file: ./abis/KnowOrigin.json
+          - name: ERC721
+            file: ./abis/ERC721.json
+        eventHandlers:
+            - event: Transfer(indexed address,indexed address,indexed uint256)
+              handler: handleTransferKnowOrigin
+        file: ./src/KnowOrigin.ts
 templates:
   - kind: ethereum/contract
     name: NftContract
