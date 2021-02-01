@@ -122,6 +122,29 @@ dataSources:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransferOurZora
       file: ./src/mapping/OurZora.ts
+  - kind: ethereum/contract
+    name: DontBuyMeme
+    network: mainnet
+    source:
+      address: "0xe4605d46Fd0B3f8329d936a8b258D69276cBa264"
+      abi: ERC721
+      startBlock: 5364090
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - NftContract
+        - Nft
+      abis:
+        - name: ERC721
+          file: ./abis/ERC721.json
+        - name: DontBuyMeme
+          file: ./abis/DontBuyMeme.json                   
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransferDontBuyMeme
+      file: ./src/mapping/DontBuyMeme.ts
 templates:
   - kind: ethereum/contract
     name: NftContract
