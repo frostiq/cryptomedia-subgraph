@@ -1,8 +1,8 @@
 import { Address } from "@graphprotocol/graph-ts"
-import { TransferSingle, TransferBatch, URI, ERC1155 } from "../generated/Rarible/ERC1155";
-import { ERC721, Transfer } from "../generated/templates/NftContract/ERC721"
-import { NftContract, Nft } from "../generated/schema"
-import { ZERO_ADDRESS } from "./constants";
+import { TransferSingle, TransferBatch, URI, ERC1155 } from "../../generated/Rarible/ERC1155";
+import { ERC721, Transfer } from "../../generated/templates/NftContract/ERC721"
+import { NftContract, Nft } from "../../generated/schema"
+import { ZERO_ADDRESS } from "../constants";
 
 export function handleTransfer(event: Transfer): void {
   let address = event.address.toHexString();
