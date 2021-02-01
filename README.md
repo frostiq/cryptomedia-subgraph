@@ -14,11 +14,11 @@ More about subgraphs and The Graph protocol you can find [here](https://thegraph
 The challenge is to be able to pull from:
 - [x] Rarible
 - [x] Superrare
-- [ ] Known Origin
+- [] Known Origin
 - [x] Nifty Gateway
 - [x] OurZora.com
 - [ ] WithFoundation.com
-- [ ] dontbuymeme.com
+- [x] dontbuymeme.com
 
 And having an open GitHub so anyone can PR new smart contracts associated with those platforms.
 
