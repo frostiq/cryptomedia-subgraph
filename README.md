@@ -16,8 +16,9 @@ The challenge is to be able to pull from:
 - [x] Superrare
 - [ ] Known Origin
 - [x] Nifty Gateway
-- [ ] OurZora.com
+- [x] OurZora.com
 - [ ] WithFoundation.com
+- [ ] dontbuymeme.com
 
 And having an open GitHub so anyone can PR new smart contracts associated with those platforms.
 
