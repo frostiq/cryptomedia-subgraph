@@ -50,7 +50,7 @@ dataSources:
           handler: handleTransferSingle
         - event: URI(string,indexed uint256)
           handler: handleURI
-      file: ./src/mapping.ts
+      file: ./src/rarible.ts
   - kind: ethereum/contract
     name: SuperRare
     network: mainnet
