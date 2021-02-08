@@ -1,5 +1,4 @@
 import { Address, BigInt, store } from "@graphprotocol/graph-ts"
-import { URI } from "../generated/Rarible/ERC1155";
 import { ERC721, Transfer } from "../generated/templates/NftContract/ERC721"
 import { Nft, Ownership } from "../generated/schema"
 import { BIGINT_ONE, BIGINT_ZERO, ZERO_ADDRESS } from "./constants";
@@ -13,8 +12,11 @@ export function handleTransfer(event: Transfer): void {
     nft = new Nft(nftId);
     nft.contract = address;
     nft.tokenID = event.params.id;
-    nft.tokenURI = contract.tokenURI(event.params.id);
     nft.createdAt = event.block.timestamp;
+
+    let tryTokenUri = contract.try_tokenURI(event.params.id);
+    nft.tokenURI = (tryTokenUri.reverted) ? '' : tryTokenUri.value;
+
     nft.save();
   }
 

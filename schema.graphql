@@ -29,5 +29,6 @@ enum Platform {
   NiftyGateway,
   Rarible,
   SuperRare,
-  KnownOrigin
+  KnownOrigin,
+  Hashmasks
 }
