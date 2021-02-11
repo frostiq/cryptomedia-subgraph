@@ -120,6 +120,29 @@ dataSources:
           - event: Transfer(indexed address,indexed address,indexed uint256)
             handler: handleTransferKnowOrigin
       file: ./src/KnowOrigin.ts
+  - kind: ethereum/contract
+    name: OurZora
+    network: mainnet
+    source:
+      address: "0xabefbc9fd2f806065b4f3c237d4b59d9a97bcac7"
+      abi: ERC721
+      startBlock: 5364090
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - NftContract
+        - Nft
+      abis:
+        - name: ERC721
+          file: ./abis/ERC721.json
+        - name: OurZoraNFT
+          file: ./abis/OurZoraNFT.json           
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransferOurZora
+      file: ./src/OurZora.ts
 templates:
   - kind: ethereum/contract
     name: NftContract
