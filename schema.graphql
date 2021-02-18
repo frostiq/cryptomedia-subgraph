@@ -26,7 +26,9 @@ type Ownership @entity {
 }
 
 enum Platform {
-  NiftyGateway,
-  Rarible,
+  KnowOrigin
+  NiftyGateway
+  OurZora
+  Rarible
   SuperRare
 }
