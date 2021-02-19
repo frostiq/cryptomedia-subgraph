@@ -103,7 +103,7 @@ dataSources:
     source:
       address: "0xFBeef911Dc5821886e1dda71586d90eD28174B7d"
       abi: KnownOrigin
-      startBlock: 10147631
+      startBlock: 6270484
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
