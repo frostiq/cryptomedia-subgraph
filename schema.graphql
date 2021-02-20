@@ -30,5 +30,6 @@ enum Platform {
   Rarible,
   SuperRare,
   KnownOrigin,
+  OurZora,
   Hashmasks
 }

@@ -103,7 +103,7 @@ dataSources:
     source:
       address: "0xFBeef911Dc5821886e1dda71586d90eD28174B7d"
       abi: KnownOrigin
-      startBlock: 10147631
+      startBlock: 6270484
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -119,7 +119,30 @@ dataSources:
       eventHandlers:
           - event: Transfer(indexed address,indexed address,indexed uint256)
             handler: handleTransferKnownOrigin
-      file: ./src/knownOrigin.ts
+      file: ./src/known-origin.ts
+  - kind: ethereum/contract
+    name: OurZora
+    network: mainnet
+    source:
+      address: "0xabefbc9fd2f806065b4f3c237d4b59d9a97bcac7"
+      abi: ERC721
+      startBlock: 11565020
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - NftContract
+        - Nft
+      abis:
+        - name: ERC721
+          file: ./abis/ERC721.json
+        - name: OurZoraNFT
+          file: ./abis/OurZoraNFT.json           
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransferOurZora
+      file: ./src/OurZora.ts
   - kind: ethereum/contract
     name: Hashmasks
     network: mainnet
@@ -139,7 +162,7 @@ dataSources:
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransferHashmasks
-      file: ./src/hashmasks.ts      
+      file: ./src/hashmasks.ts
 templates:
   - kind: ethereum/contract
     name: NftContract
