@@ -98,12 +98,12 @@ dataSources:
           handler: handleTransferSuperRare
       file: ./src/superRare.ts
   - kind: ethereum/contract
-    name: KnowOrigin
+    name: KnownOrigin
     network: mainnet
     source:
       address: "0xFBeef911Dc5821886e1dda71586d90eD28174B7d"
-      abi: KnowOrigin
-      startBlock: 10147631
+      abi: KnownOrigin
+      startBlock: 6270484
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -112,21 +112,21 @@ dataSources:
         - NftContract
         - Nft
       abis:
-        - name: KnowOrigin
-          file: ./abis/KnowOrigin.json
+        - name: KnownOrigin
+          file: ./abis/KnownOrigin.json
         - name: ERC721
           file: ./abis/ERC721.json
       eventHandlers:
           - event: Transfer(indexed address,indexed address,indexed uint256)
-            handler: handleTransferKnowOrigin
-      file: ./src/KnowOrigin.ts
+            handler: handleTransferKnownOrigin
+      file: ./src/known-origin.ts
   - kind: ethereum/contract
     name: OurZora
     network: mainnet
     source:
       address: "0xabefbc9fd2f806065b4f3c237d4b59d9a97bcac7"
       abi: ERC721
-      startBlock: 5364090
+      startBlock: 11565020
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
