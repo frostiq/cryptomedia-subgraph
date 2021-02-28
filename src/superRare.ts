@@ -1,9 +1,9 @@
-import { Transfer } from "../../generated/templates/NftContract/ERC721";
-import { Nft, NftContract } from "../../generated/schema";
+import { Transfer } from "../generated/templates/NftContract/ERC721";
+import { Nft, NftContract } from "../generated/schema";
 import { fetchName, fetchSymbol, handleTransfer } from "./mapping";
-import { SuperRare } from "../../generated/SuperRare/SuperRare";
-import { SuperRareV2 } from "../../generated/SuperRareV2/SuperRareV2";
-import { SUPERRARE, SUPERRARE_V2, ZERO_ADDRESS } from "../constants/index";
+import { SuperRare } from "../generated/SuperRare/SuperRare";
+import { SuperRareV2 } from "../generated/SuperRareV2/SuperRareV2";
+import { SUPERRARE, SUPERRARE_V2, ZERO_ADDRESS } from "./constants";
 import { Address, BigInt, log } from "@graphprotocol/graph-ts";
 
 export function handleTransferSuperRare(event: Transfer): void {

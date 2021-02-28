@@ -2,7 +2,7 @@ type Nft @entity {
   id: ID!
   contract: NftContract!
   tokenID: BigInt!
-  owner: Bytes!
+  ownership: [Ownership!]! @derivedFrom(field: "nft")
   creatorName: String
   creatorAddress: Bytes
   tokenURI: String!
@@ -18,8 +18,17 @@ type NftContract @entity {
   nfts: [Nft!]! @derivedFrom(field: "contract")
 }
 
+type Ownership @entity {
+  id: ID!
+  owner: Bytes!
+  nft: Nft!
+  quantity: BigInt!
+}
+
 enum Platform {
-  NiftyGateway,
-  Rarible,
+  KnownOrigin
+  NiftyGateway
+  OurZora
+  Rarible
   SuperRare
 }
