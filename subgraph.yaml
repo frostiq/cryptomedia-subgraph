@@ -121,7 +121,7 @@ dataSources:
             handler: handleTransferKnownOrigin
       file: ./src/known-origin.ts
   - kind: ethereum/contract
-    name: OurZora
+    name: Zora
     network: mainnet
     source:
       address: "0xabefbc9fd2f806065b4f3c237d4b59d9a97bcac7"
@@ -137,12 +137,12 @@ dataSources:
       abis:
         - name: ERC721
           file: ./abis/ERC721.json
-        - name: OurZoraNFT
-          file: ./abis/OurZoraNFT.json           
+        - name: ZoraNFT
+          file: ./abis/ZoraNFT.json           
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransferOurZora
-      file: ./src/OurZora.ts
+          handler: handleTransferZora
+      file: ./src/zora.ts
 templates:
   - kind: ethereum/contract
     name: NftContract

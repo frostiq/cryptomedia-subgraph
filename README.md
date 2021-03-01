@@ -17,7 +17,7 @@ The challenge is to be able to pull from:
 - [x] Superrare
 - [x] Known Origin
 - [x] Nifty Gateway
-- [x] OurZora.com
+- [x] Zora
 - [ ] WithFoundation.com
 - [ ] dontbuymeme.com
 
