@@ -31,4 +31,5 @@ enum Platform {
   Zora
   Rarible
   SuperRare
+  Meme
 }

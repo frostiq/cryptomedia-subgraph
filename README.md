@@ -19,7 +19,7 @@ The challenge is to be able to pull from:
 - [x] Nifty Gateway
 - [x] Zora
 - [ ] WithFoundation.com
-- [ ] dontbuymeme.com
+- [x] dontbuymeme.com
 
 And having an open GitHub so anyone can PR new smart contracts associated with those platforms.
 

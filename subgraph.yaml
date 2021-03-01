@@ -47,7 +47,7 @@ dataSources:
         - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
           handler: handleTransferBatch
         - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
-          handler: handleTransferSingle
+          handler: handleTransferSingleRarible
         - event: URI(string,indexed uint256)
           handler: handleURI
       file: ./src/rarible.ts
@@ -143,6 +143,31 @@ dataSources:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransferZora
       file: ./src/zora.ts
+  - kind: ethereum/contract
+    name: Meme
+    network: mainnet
+    source:
+      address: "0xe4605d46Fd0B3f8329d936a8b258D69276cBa264"
+      abi: ERC1155
+      startBlock: 10734502
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - NftContract
+        - Nft
+      abis:
+        - name: ERC1155
+          file: ./abis/ERC1155.json
+      eventHandlers:
+        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
+          handler: handleTransferBatch
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingleMeme
+        - event: URI(string,indexed uint256)
+          handler: handleURI
+      file: ./src/meme.ts
 templates:
   - kind: ethereum/contract
     name: NftContract

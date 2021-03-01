@@ -5,17 +5,17 @@ import { handleTransferSingle, handleURI } from "./mappings-erc-1155";
 
 export { handleURI };
 
-export function handleTransferSingleRarible(event: TransferSingle): void {
+export function handleTransferSingleMeme(event: TransferSingle): void {
   let address = event.address.toHexString();
   if (NftContract.load(address) == null) {
     let nftContract = new NftContract(address);
     nftContract.name = fetchName(event.address);
     nftContract.symbol = fetchSymbol(event.address);
-    nftContract.platform = "Rarible";
+    nftContract.platform = "Meme";
     nftContract.save();
   }
 
-  handleTransferSingle(event);
+  handleTransferSingle(event)
 }
 
 export function handleTransferBatch(event: TransferBatch): void {
