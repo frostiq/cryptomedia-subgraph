@@ -39,7 +39,7 @@ export function handleURI(event: URI): void {
     nft.save();
 }
 
-function transferBase(contractAddress: Address, from: Address, to: Address, id: BigInt, value: BigInt, timestamp: BigInt) {
+function transferBase(contractAddress: Address, from: Address, to: Address, id: BigInt, value: BigInt, timestamp: BigInt): void {
     let nftId = contractAddress + "/" + id.toString();
     let nft = Nft.load(nftId);
     if (nft == null) {
