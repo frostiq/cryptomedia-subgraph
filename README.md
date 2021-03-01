@@ -13,13 +13,13 @@ More about subgraphs and The Graph protocol you can find [here](https://thegraph
 - Have all platforms smart contracts integrated 
 
 The challenge is to be able to pull from:
-- [x] Rarible
-- [x] Superrare
-- [x] Known Origin
-- [x] Nifty Gateway
-- [x] Zora
-- [ ] WithFoundation.com
-- [x] dontbuymeme.com
+- [x] [Rarible](https://rarible.com/)
+- [x] [Superrare](https://www.superrare.co/)
+- [x] [Known Origin](https://knownorigin.io/)
+- [x] [Nifty Gateway](https://niftygateway.com/)
+- [x] [Zora](https://zora.co/)
+- [ ] [Foundation](https://foundation.app/)
+- [x] [Meme](https://dontbuymeme.com/)
 
 And having an open GitHub so anyone can PR new smart contracts associated with those platforms.
 
