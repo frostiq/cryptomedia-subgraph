@@ -21,12 +21,14 @@ export function handleTransferBatch(event: TransferBatch): void {
     }
 
     for (let i = 0; i < event.params._ids.length; i++) {
+        let ids = event.params._ids;
+        let values = event.params._values;
         transferBase(
             event.address,
             event.params._from,
             event.params._to,
-            event.params._ids[i],
-            event.params._values[i],
+            ids[i],
+            values[i],
             event.block.timestamp
         );
     }
@@ -40,7 +42,7 @@ export function handleURI(event: URI): void {
 }
 
 function transferBase(contractAddress: Address, from: Address, to: Address, id: BigInt, value: BigInt, timestamp: BigInt): void {
-    let nftId = contractAddress + "/" + id.toString();
+    let nftId = contractAddress.toHexString() + "/" + id.toString();
     let nft = Nft.load(nftId);
     if (nft == null) {
         let contract = ERC1155.bind(contractAddress);
