@@ -6,22 +6,22 @@ import { handleTransferBatch, handleTransferSingle, handleURI } from "./mappings
 
 export { handleURI };
 
-export function handleTransferSingleRarible(event: TransferSingle): void {
+export function handleTransferSingleMeme(event: TransferSingle): void {
   ensureNftContract(event.address);
   handleTransferSingle(event);
 }
 
-export function handleTransferBatchRarible(event: TransferBatch): void {
+export function handleTransferBatchMeme(event: TransferBatch): void {
   ensureNftContract(event.address);
   handleTransferBatch(event);
 }
 
-function ensureNftContract(address: Address): void{
+function ensureNftContract(address: Address): void {
   if (NftContract.load(address.toHexString()) == null) {
     let nftContract = new NftContract(address.toHexString());
     nftContract.name = fetchName(address);
     nftContract.symbol = fetchSymbol(address);
-    nftContract.platform = "Rarible";
+    nftContract.platform = "Meme";
     nftContract.save();
   }
 }

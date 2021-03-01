@@ -8,7 +8,7 @@ export let SUPERRARE_V2 = Address.fromString("0xb932a70A57673d89f4acfFBE830E8ed7
 
 export let KNOW_ORIGIN = Address.fromString("0xFBeef911Dc5821886e1dda71586d90eD28174B7d");
 
-export let OURZORA_NFT = Address.fromString("0xabEFBc9fD2F806065b4f3C237d4b59D9A97Bcac7");
+export let ZORA_NFT = Address.fromString("0xabEFBc9fD2F806065b4f3C237d4b59D9A97Bcac7");
 
 export let ZERO_ADDRESS = Address.fromString("0x0000000000000000000000000000000000000000");
 export let BIGINT_ZERO = BigInt.fromI32(0);
