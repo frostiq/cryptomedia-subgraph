@@ -16,7 +16,7 @@ export function handleTransferBatchRarible(event: TransferBatch): void {
   handleTransferBatch(event);
 }
 
-function ensureNftContract(address: Address){
+function ensureNftContract(address: Address): void{
   if (NftContract.load(address.toHexString()) == null) {
     let nftContract = new NftContract(address.toHexString());
     nftContract.name = fetchName(address);
