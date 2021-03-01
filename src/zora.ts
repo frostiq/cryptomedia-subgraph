@@ -6,7 +6,7 @@ import { ZORA_NFT, ZERO_ADDRESS } from "./constants";
 import { Address, BigInt, log,  } from "@graphprotocol/graph-ts";
 
 
-export function handleTransferora(event: Transfer): void {
+export function handleTransferZora(event: Transfer): void {
   let address = event.address.toHexString();
   if (NftContract.load(address) == null) {
     let nftContract = new NftContract(address);
