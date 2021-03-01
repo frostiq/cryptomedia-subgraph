@@ -45,7 +45,7 @@ dataSources:
           file: ./abis/ERC721.json
       eventHandlers:
         - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
-          handler: handleTransferBatch
+          handler: handleTransferBatchRarible
         - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
           handler: handleTransferSingleRarible
         - event: URI(string,indexed uint256)
@@ -162,7 +162,7 @@ dataSources:
           file: ./abis/ERC1155.json
       eventHandlers:
         - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
-          handler: handleTransferBatch
+          handler: handleTransferBatchMeme
         - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
           handler: handleTransferSingleMeme
         - event: URI(string,indexed uint256)
