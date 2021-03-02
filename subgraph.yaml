@@ -23,7 +23,7 @@ dataSources:
       eventHandlers:
         - event: BuilderInstanceCreated(address,uint256)
           handler: handleBuilderInstanceCreated
-      file: ./src/mapping/nifty-gateway.ts
+      file: ./src/nifty-gateway.ts
   - kind: ethereum/contract
     name: Rarible
     network: mainnet
@@ -45,12 +45,12 @@ dataSources:
           file: ./abis/ERC721.json
       eventHandlers:
         - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
-          handler: handleTransferBatch
+          handler: handleTransferBatchRarible
         - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
-          handler: handleTransferSingle
+          handler: handleTransferSingleRarible
         - event: URI(string,indexed uint256)
           handler: handleURI
-      file: ./src/mapping/mapping.ts
+      file: ./src/rarible.ts
   - kind: ethereum/contract
     name: SuperRare
     network: mainnet
@@ -73,7 +73,7 @@ dataSources:
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransferSuperRare
-      file: ./src/mapping/superRare.ts
+      file: ./src/superRare.ts
   - kind: ethereum/contract
     name: SuperRareV2
     network: mainnet
@@ -96,14 +96,37 @@ dataSources:
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransferSuperRare
-      file: ./src/mapping/superRare.ts
+      file: ./src/superRare.ts
   - kind: ethereum/contract
-    name: OurZora
+    name: KnownOrigin
+    network: mainnet
+    source:
+      address: "0xFBeef911Dc5821886e1dda71586d90eD28174B7d"
+      abi: KnownOrigin
+      startBlock: 6270484
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - NftContract
+        - Nft
+      abis:
+        - name: KnownOrigin
+          file: ./abis/KnownOrigin.json
+        - name: ERC721
+          file: ./abis/ERC721.json
+      eventHandlers:
+          - event: Transfer(indexed address,indexed address,indexed uint256)
+            handler: handleTransferKnownOrigin
+      file: ./src/known-origin.ts
+  - kind: ethereum/contract
+    name: Zora
     network: mainnet
     source:
       address: "0xabefbc9fd2f806065b4f3c237d4b59d9a97bcac7"
       abi: ERC721
-      startBlock: 5364090
+      startBlock: 11565020
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -114,21 +137,19 @@ dataSources:
       abis:
         - name: ERC721
           file: ./abis/ERC721.json
-        - name: OurZoraNFT
-          file: ./abis/OurZoraNFT.json          
-        - name: OurZoraMarket
-          file: ./abis/OurZoraMarket.json          
+        - name: ZoraNFT
+          file: ./abis/ZoraNFT.json           
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransferOurZora
-      file: ./src/mapping/OurZora.ts
+          handler: handleTransferZora
+      file: ./src/zora.ts
   - kind: ethereum/contract
-    name: DontBuyMeme
+    name: Meme
     network: mainnet
     source:
       address: "0xe4605d46Fd0B3f8329d936a8b258D69276cBa264"
-      abi: ERC721
-      startBlock: 5364090
+      abi: ERC1155
+      startBlock: 10734502
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -137,14 +158,16 @@ dataSources:
         - NftContract
         - Nft
       abis:
-        - name: ERC721
-          file: ./abis/ERC721.json
-        - name: DontBuyMeme
-          file: ./abis/DontBuyMeme.json                   
+        - name: ERC1155
+          file: ./abis/ERC1155.json
       eventHandlers:
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransferDontBuyMeme
-      file: ./src/mapping/dontbuymeme.ts
+        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
+          handler: handleTransferBatchMeme
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingleMeme
+        - event: URI(string,indexed uint256)
+          handler: handleURI
+      file: ./src/meme.ts
   - kind: ethereum/contract
     name: Sorare
     network: mainnet
@@ -188,5 +211,5 @@ templates:
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransferNiftyGateway
-      file: ./src/mapping/nifty-gateway.ts
+      file: ./src/nifty-gateway.ts
      
