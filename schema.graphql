@@ -32,4 +32,5 @@ enum Platform {
   Rarible
   SuperRare
   Meme
+  Sorare
 }
