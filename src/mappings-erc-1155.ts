@@ -36,7 +36,7 @@ export function handleTransferBatch(event: TransferBatch): void {
 
 export function handleURI(event: URI): void {
     let id = event.address.toHexString() + "/" + event.params._id.toString();
-    let nft = new Nft(id);
+    let nft = Nft.load(id);
     if (nft != null) {
         nft.tokenURI = event.params._value;
         nft.save();
