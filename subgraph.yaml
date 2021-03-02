@@ -190,7 +190,7 @@ dataSources:
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransferSorare
-      file: ./src/mapping/Sorare.ts
+      file: ./src/sorare.ts
 templates:
   - kind: ethereum/contract
     name: NftContract
