@@ -188,7 +188,7 @@ dataSources:
         - name: ERC721
           file: ./abis/ERC721.json
       eventHandlers:
-        - event: Transfer(indexed address,indexed address,uint256)
+        - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransferSorare
       file: ./src/sorare.ts
 templates:
