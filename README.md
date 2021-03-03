@@ -20,6 +20,7 @@ The challenge is to be able to pull from:
 - [x] [Zora](https://zora.co/)
 - [ ] [Foundation](https://foundation.app/)
 - [x] [Meme](https://dontbuymeme.com/)
+- [x] [Sorare](https://sorare.com/)
 
 And having an open GitHub so anyone can PR new smart contracts associated with those platforms.
 
